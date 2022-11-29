@@ -1,6 +1,6 @@
 "use strict";
-module.exports = { Ship: Ship };
-
+module.exports = { Ship: Ship, Gameboard: Gameboard, Player: Player };
+//factory functions-----------------------------------------------
 function Ship(length) {
   return {
     length: length,
@@ -11,7 +11,9 @@ function Ship(length) {
       this.hits++;
     },
     isSunk() {
-      this.sunk = true;
+      if (this.hits === this.length) {
+        this.sunk = true;
+      }
     },
   };
 }
@@ -39,3 +41,4 @@ function Player() {
     },
   };
 }
+//factory functions-------------------------------------------------------
