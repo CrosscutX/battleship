@@ -1,7 +1,7 @@
 "use strict";
-module.exports = { createShip: createShip };
+module.exports = { Ship: Ship };
 
-function createShip(length) {
+function Ship(length) {
   return {
     length: length,
     hits: 0,
