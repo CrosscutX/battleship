@@ -1,3 +1,4 @@
+"use strict";
 module.exports = { createShip: createShip };
 
 function createShip(length) {
@@ -15,7 +16,26 @@ function createShip(length) {
   };
 }
 
-const newShip = createShip(5);
-newShip.hit();
-newShip.isSunk();
-console.log(newShip);
+function Gameboard() {
+  return {
+    misses: 0,
+    updateMiss() {
+      this.misses++;
+    },
+    placeShips() {},
+    receiveAttack() {},
+  };
+}
+
+function Player() {
+  return {
+    name: "",
+    turn: false,
+    attack() {
+      //Find out if the player is a bot, I can figure out how to attack.
+      if (this.name === "Computer") {
+      } else {
+      }
+    },
+  };
+}
