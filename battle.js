@@ -19,15 +19,37 @@ function Ship(length) {
 }
 
 function Gameboard() {
+  let board = [];
+  for (let i = 0; i < 10; i++) {
+    board[i] = [];
+    for (let j = 0; j < 10; j++) {
+      board[i][j] = "O";
+    }
+  }
+
   return {
+    board: board,
     misses: 0,
     updateMiss() {
       this.misses++;
     },
-    placeShips() {},
+    //Places a ship input into the board array based on the length of the ship
+    placeShips(row, column, length) {
+      if (column + length > 10) {
+        console.log("Invalid board position");
+        return;
+      }
+      for (let i = 0; i < length; i++) {
+        this.board[row][column] = "S";
+        column++;
+      }
+    },
     receiveAttack() {},
   };
 }
+let ship1 = Gameboard();
+ship1.placeShips(0, 0, 5);
+console.log(ship1);
 
 function Player() {
   return {

@@ -14,3 +14,19 @@ test("Ship calculates being sunk properly", () => {
   expect(newShip.sunk).toEqual(true);
 });
 //Gameboard tests
+test("Gameboard is placing ships properly", () => {
+  const playerBoard = battle.Gameboard();
+  playerBoard.placeShips(0, 0, 5);
+  expect(playerBoard.board).toEqual([
+    ["S", "S", "S", "S", "S", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ]);
+});
