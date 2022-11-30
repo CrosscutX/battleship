@@ -1,8 +1,9 @@
 "use strict";
 module.exports = { Ship: Ship, Gameboard: Gameboard, Player: Player };
 //factory functions-----------------------------------------------
-function Ship(length) {
+function Ship(name, length) {
   return {
+    name: name,
     length: length,
     hits: 0,
     sunk: false,
@@ -34,22 +35,37 @@ function Gameboard() {
       this.misses++;
     },
     //Places a ship input into the board array based on the length of the ship
-    placeShips(row, column, length) {
+    placeShips(row, column, length, type) {
       if (column + length > 10) {
         console.log("Invalid board position");
         return;
       }
       for (let i = 0; i < length; i++) {
-        this.board[row][column] = "S";
-        column++;
+        if (type === "Carrier") {
+          this.board[row][column] = "C";
+          column++;
+        } else if (type === "Battleship") {
+          this.board[row][column] = "B";
+          column++;
+        } else if (type === "Destroyer") {
+          this.board[row][column] = "D";
+          column++;
+        } else if (type === "Submarine") {
+          this.board[row][column] = "S";
+          column++;
+        } else if (type === "Patrol Boat") {
+          this.board[row][column] = "P";
+          column++;
+        }
       }
     },
-    receiveAttack() {},
+    receiveAttack(row, column) {},
   };
 }
-let ship1 = Gameboard();
-ship1.placeShips(0, 0, 5);
-console.log(ship1);
+let battleship = Ship("Battleship", 4);
+let playerBoard = Gameboard();
+playerBoard.placeShips(0, 6, 4, battleship.name);
+console.log(playerBoard);
 
 function Player() {
   return {
