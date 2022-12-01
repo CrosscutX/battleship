@@ -29,13 +29,14 @@ function Gameboard() {
   }
 
   return {
+    direction: "horizontal",
     board: board,
     misses: 0,
     updateMiss() {
       this.misses++;
     },
     //Places a ship input into the board array based on the length of the ship
-    placeShips(row, column, length, type) {
+    placeShips(row, column, length, type, direction) {
       if (column + length > 10) {
         console.log("Invalid board position");
         return;
@@ -80,3 +81,6 @@ function Player() {
   };
 }
 //factory functions-------------------------------------------------------
+function placeHorizontal() {}
+
+function placeVertical() {}
