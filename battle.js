@@ -35,28 +35,64 @@ function Gameboard() {
     updateMiss() {
       this.misses++;
     },
+
+    swapDirection() {
+      if (this.direction === "horizontal") {
+        this.direction = "vertical";
+      } else if (this.direction === "vertical") {
+        this.direction = "horizontal";
+      }
+    },
     //Places a ship input into the board array based on the length of the ship
-    placeShips(row, column, length, type, direction) {
-      if (column + length > 10) {
+    placeShips(row, column, length, type) {
+      //Check if a horizontal ship is placed too far right
+      if (column + length > 10 && this.direction === "horizontal") {
         console.log("Invalid board position");
         return;
       }
-      for (let i = 0; i < length; i++) {
-        if (type === "Carrier") {
-          this.board[row][column] = "C";
-          column++;
-        } else if (type === "Battleship") {
-          this.board[row][column] = "B";
-          column++;
-        } else if (type === "Destroyer") {
-          this.board[row][column] = "D";
-          column++;
-        } else if (type === "Submarine") {
-          this.board[row][column] = "S";
-          column++;
-        } else if (type === "Patrol Boat") {
-          this.board[row][column] = "P";
-          column++;
+      //Check if a vertical ship is placed too far down
+      if (row + length > 10 && this.direction === "vertical") {
+        console.log("invalid board position");
+        return;
+      }
+      if (this.direction === "horizontal") {
+        for (let i = 0; i < length; i++) {
+          if (type === "Carrier") {
+            this.board[row][column] = "C";
+            column++;
+          } else if (type === "Battleship") {
+            this.board[row][column] = "B";
+            column++;
+          } else if (type === "Destroyer") {
+            this.board[row][column] = "D";
+            column++;
+          } else if (type === "Submarine") {
+            this.board[row][column] = "S";
+            column++;
+          } else if (type === "Patrol Boat") {
+            this.board[row][column] = "P";
+            column++;
+          }
+        }
+      }
+      if (this.direction === "vertical") {
+        for (let i = 0; i < length; i++) {
+          if (type === "Carrier") {
+            this.board[row][column] = "C";
+            row++;
+          } else if (type === "Battleship") {
+            this.board[row][column] = "B";
+            row++;
+          } else if (type === "Destroyer") {
+            this.board[row][column] = "D";
+            row++;
+          } else if (type === "Submarine") {
+            this.board[row][column] = "S";
+            row++;
+          } else if (type === "Patrol Boat") {
+            this.board[row][column] = "P";
+            row++;
+          }
         }
       }
     },
@@ -65,7 +101,8 @@ function Gameboard() {
 }
 let battleship = Ship("Battleship", 4);
 let playerBoard = Gameboard();
-playerBoard.placeShips(0, 6, 4, battleship.name);
+playerBoard.swapDirection();
+playerBoard.placeShips(0, 0, 4, battleship.name);
 console.log(playerBoard);
 
 function Player() {

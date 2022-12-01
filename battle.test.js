@@ -64,3 +64,21 @@ test("Board doesn't place ships that are too long", () => {
     ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
   ]);
 });
+
+test("Vertical placement works", () => {
+  const playerBoard = battle.Gameboard();
+  playerBoard.swapDirection();
+  playerBoard.placeShips(0, 0, 4, "Battleship");
+  expect(playerBoard.board).toEqual([
+    ["B", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["B", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["B", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["B", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ]);
+});
