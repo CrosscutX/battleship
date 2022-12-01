@@ -55,6 +55,8 @@ function Gameboard() {
         console.log("invalid board position");
         return;
       }
+      //Lay ships on the grid to the right when direction is horizontal
+      //Different letters are applied to the array based on the boat
       if (this.direction === "horizontal") {
         for (let i = 0; i < length; i++) {
           if (type === "Carrier") {
@@ -75,6 +77,7 @@ function Gameboard() {
           }
         }
       }
+      //lay ships downwards when direction is vertical
       if (this.direction === "vertical") {
         for (let i = 0; i < length; i++) {
           if (type === "Carrier") {
@@ -96,7 +99,11 @@ function Gameboard() {
         }
       }
     },
-    receiveAttack(row, column) {},
+
+    receiveAttack(row, column) {
+      if (this.board[row][column] === "O") {
+      }
+    },
   };
 }
 let battleship = Ship("Battleship", 4);
