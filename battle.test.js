@@ -106,3 +106,20 @@ test("Ships don't place when overlapping", () => {
     ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
   ]);
 });
+
+test("Missed attacks register", () => {
+  const playerBoard = battle.Gameboard();
+  playerBoard.receiveAttack(0, 0);
+  expect(playerBoard.board).toEqual([
+    ["M", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ]);
+});
