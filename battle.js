@@ -118,22 +118,26 @@ function Gameboard() {
     //probably need to pass the entire ship objects as arguments
     //for the place ships, and add them to an array.
     receiveAttack(row, column) {
+      //check the grid to see what the space holds, then update board
+      //based on that space
       if (this.board[row][column] === "O") {
+        this.board[row][column] = "M";
+      } else if ((this.board[row][column] = "C")) {
+        return;
       }
     },
   };
 }
-const battleship = Ship("Battleship", 4);
-const carrier = Ship("Carrier", 5);
+
 const playerBoard = Gameboard();
-playerBoard.placeShips(2, 0, battleship.length, battleship);
-playerBoard.swapDirection();
-playerBoard.placeShips(0, 0, carrier.length, carrier);
+playerBoard.receiveAttack(0, 0);
+console.log(playerBoard.board);
 
 function Player() {
   return {
     name: "",
     turn: false,
+    bot: false,
     attack() {
       //Find out if the player is a bot, I can figure out how to attack.
     },
@@ -148,7 +152,6 @@ function checkForShip(grid, row, column, length, direction) {
         flag = true;
         column++;
       } else if (grid[row][column] !== "O") {
-        console.log("Check for ship is false");
         flag = false;
         return;
       }
@@ -167,7 +170,6 @@ function checkForShip(grid, row, column, length, direction) {
     }
   }
 
-  console.log("Check for ship is true");
   return flag;
 }
 function gameStart() {}
