@@ -112,26 +112,70 @@ function Gameboard() {
           }
         }
       }
-      console.log(this.board);
     },
     //Need to figure out implementation for hitting the right ship,
     //probably need to pass the entire ship objects as arguments
     //for the place ships, and add them to an array.
     receiveAttack(row, column) {
       //check the grid to see what the space holds, then update board
-      //based on that space
+      //based on that space, also update hits
+      if (this.board[row][column] === "M" || this.board[row][column] === "H") {
+        console.log("INVALID SPACE");
+        return;
+      }
       if (this.board[row][column] === "O") {
         this.board[row][column] = "M";
-      } else if ((this.board[row][column] = "C")) {
-        return;
+      } else if (this.board[row][column] === "C") {
+        this.board[row][column] = "H";
+
+        this.ships.forEach((ship) => {
+          if (ship.name === "Carrier") {
+            ship.hit();
+          }
+        });
+      } else if (this.board[row][column] === "B") {
+        this.board[row][column] = "H";
+
+        this.ships.forEach((ship) => {
+          if (ship.name === "Battleship") {
+            ship.hit();
+          }
+        });
+      } else if (this.board[row][column] === "D") {
+        this.board[row][column] = "H";
+
+        this.ships.forEach((ship) => {
+          if (ship.name === "Destroyer") {
+            ship.hit();
+          }
+        });
+      } else if (this.board[row][column] === "S") {
+        this.board[row][column] = "H";
+
+        this.ships.forEach((ship) => {
+          if (ship.name === "Submarine") {
+            ship.hit();
+          }
+        });
+      } else if (this.board[row][column] === "P") {
+        this.board[row][column] = "H";
+
+        this.ships.forEach((ship) => {
+          if (ship.name === "Patrol Boat") {
+            ship.hit();
+          }
+        });
       }
     },
   };
 }
 
 const playerBoard = Gameboard();
+const carrier = Ship("Carrier", 5);
+playerBoard.placeShips(0, 0, carrier.length, carrier);
 playerBoard.receiveAttack(0, 0);
-console.log(playerBoard.board);
+playerBoard.receiveAttack(0, 0);
+console.log(carrier);
 
 function Player() {
   return {
@@ -172,4 +216,5 @@ function checkForShip(grid, row, column, length, direction) {
 
   return flag;
 }
+
 function gameStart() {}

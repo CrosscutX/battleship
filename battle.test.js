@@ -123,3 +123,64 @@ test("Missed attacks register", () => {
     ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
   ]);
 });
+
+test("Recognizes ship attacks", () => {
+  const playerBoard = battle.Gameboard();
+  const carrier = battle.Ship("Carrier", 5);
+  const battleship = battle.Ship("Battleship", 4);
+  const destroyer = battle.Ship("Destroyer", 3);
+  const submarine = battle.Ship("Submarine", 3);
+  const boat = battle.Ship("Patrol Boat", 2);
+
+  playerBoard.placeShips(0, 0, carrier.length, carrier);
+  playerBoard.placeShips(1, 0, battleship.length, battleship);
+  playerBoard.placeShips(2, 0, destroyer.length, destroyer);
+  playerBoard.placeShips(3, 0, submarine.length, submarine);
+  playerBoard.placeShips(4, 0, boat.length, boat);
+
+  playerBoard.receiveAttack(0, 0);
+  playerBoard.receiveAttack(1, 0);
+  playerBoard.receiveAttack(2, 0);
+  playerBoard.receiveAttack(3, 0);
+  playerBoard.receiveAttack(4, 0);
+
+  expect(playerBoard.board).toEqual([
+    ["H", "C", "C", "C", "C", "O", "O", "O", "O", "O"],
+    ["H", "B", "B", "B", "O", "O", "O", "O", "O", "O"],
+    ["H", "D", "D", "O", "O", "O", "O", "O", "O", "O"],
+    ["H", "S", "S", "O", "O", "O", "O", "O", "O", "O"],
+    ["H", "P", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ]);
+});
+
+test("Ship hits update properly", () => {
+  const playerBoard = battle.Gameboard();
+  const carrier = battle.Ship("Carrier", 5);
+  const battleship = battle.Ship("Battleship", 4);
+  const destroyer = battle.Ship("Destroyer", 3);
+  const submarine = battle.Ship("Submarine", 3);
+  const boat = battle.Ship("Patrol Boat", 2);
+
+  playerBoard.placeShips(0, 0, carrier.length, carrier);
+  playerBoard.placeShips(1, 0, battleship.length, battleship);
+  playerBoard.placeShips(2, 0, destroyer.length, destroyer);
+  playerBoard.placeShips(3, 0, submarine.length, submarine);
+  playerBoard.placeShips(4, 0, boat.length, boat);
+
+  playerBoard.receiveAttack(0, 0);
+  playerBoard.receiveAttack(1, 0);
+  playerBoard.receiveAttack(2, 0);
+  playerBoard.receiveAttack(3, 0);
+  playerBoard.receiveAttack(4, 0);
+
+  expect(carrier.hits).toEqual(1);
+  expect(battleship.hits).toEqual(1);
+  expect(destroyer.hits).toEqual(1);
+  expect(submarine.hits).toEqual(1);
+  expect(boat.hits).toEqual(1);
+});
