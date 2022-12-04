@@ -184,3 +184,18 @@ test("Ship hits update properly", () => {
   expect(submarine.hits).toEqual(1);
   expect(boat.hits).toEqual(1);
 });
+
+test("Properly calculate end of game", () => {
+  const playerBoard = battle.Gameboard();
+  const carrier = battle.Ship("Carrier", 5);
+
+  playerBoard.placeShips(0, 0, carrier.length, carrier);
+
+  playerBoard.receiveAttack(0, 0);
+  playerBoard.receiveAttack(0, 1);
+  playerBoard.receiveAttack(0, 2);
+  playerBoard.receiveAttack(0, 3);
+  playerBoard.receiveAttack(0, 4);
+
+  expect(playerBoard.checkGameEnd()).toEqual(true);
+});

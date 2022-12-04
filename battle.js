@@ -10,6 +10,9 @@ function Ship(name, length) {
 
     hit() {
       this.hits++;
+      if (this.hits === this.length) {
+        this.isSunk();
+      }
     },
     isSunk() {
       if (this.hits === this.length) {
@@ -166,16 +169,12 @@ function Gameboard() {
           }
         });
       }
+    }, //receive attack end
+    checkGameEnd() {
+      return this.ships.every((ship) => ship.sunk === true);
     },
   };
 }
-
-const playerBoard = Gameboard();
-const carrier = Ship("Carrier", 5);
-playerBoard.placeShips(0, 0, carrier.length, carrier);
-playerBoard.receiveAttack(0, 0);
-playerBoard.receiveAttack(0, 0);
-console.log(carrier);
 
 function Player() {
   return {
@@ -189,6 +188,8 @@ function Player() {
 }
 //factory functions-------------------------------------------------------
 function checkForShip(grid, row, column, length, direction) {
+  //Loops through and checks every spot that a ship would potentially be placed,
+  //returns true if each space is open and false if any are occupied.
   let flag = true;
   if (direction === "horizontal") {
     for (let i = 0; i < length; i++) {
