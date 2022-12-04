@@ -199,3 +199,44 @@ test("Properly calculate end of game", () => {
 
   expect(playerBoard.checkGameEnd()).toEqual(true);
 });
+
+test("Boards stored in player object update the same for each player object", () => {
+  const player = battle.Player();
+  const computer = battle.Player();
+  const playerBoard = battle.Gameboard();
+  const computerBoard = battle.Gameboard();
+
+  player.myboard = playerBoard;
+  player.enemyBoard = computerBoard;
+  computer.myboard = computerBoard;
+  computer.enemyBoard = playerBoard;
+
+  playerBoard.receiveAttack(0, 0);
+  playerBoard.receiveAttack(0, 1);
+
+  expect(player.myboard.board).toEqual([
+    ["M", "M", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ]);
+
+  expect(computer.enemyBoard.board).toEqual([
+    ["M", "M", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+    ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ]);
+});

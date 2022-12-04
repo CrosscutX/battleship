@@ -33,6 +33,7 @@ function Gameboard() {
   }
 
   return {
+    player: "",
     ships: [],
     direction: "horizontal",
     board: board,
@@ -179,13 +180,30 @@ function Gameboard() {
 function Player() {
   return {
     name: "",
+    myboard: "",
+    enemyBoard: "",
     turn: false,
     bot: false,
     attack() {
-      //Find out if the player is a bot, I can figure out how to attack.
+      //Find out if the player is a bot, then write a function to calculate
+      //How the player launches an attack
     },
   };
 }
+
+const player = Player();
+const computer = Player();
+const playerBoard = Gameboard();
+const computerBoard = Gameboard();
+player.myboard = playerBoard;
+player.enemyBoard = computerBoard;
+computer.myboard = computerBoard;
+computer.enemyBoard = playerBoard;
+
+playerBoard.receiveAttack(0, 0);
+computerBoard.receiveAttack(0, 1);
+console.log(player.myboard.board);
+console.log(computer.enemyBoard.board);
 //factory functions-------------------------------------------------------
 function checkForShip(grid, row, column, length, direction) {
   //Loops through and checks every spot that a ship would potentially be placed,
@@ -217,5 +235,8 @@ function checkForShip(grid, row, column, length, direction) {
 
   return flag;
 }
+//GAME START
+gameLoop();
+function gameLoop() {}
 
 function gameStart() {}
