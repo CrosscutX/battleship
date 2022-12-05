@@ -172,6 +172,7 @@ function Gameboard() {
       }
     }, //receive attack end
     checkGameEnd() {
+      //returns true if every ship's sunk variable equals true
       return this.ships.every((ship) => ship.sunk === true);
     },
   };
@@ -184,9 +185,17 @@ function Player() {
     enemyBoard: "",
     turn: false,
     bot: false,
-    attack() {
+    attack(row, column) {
       //Find out if the player is a bot, then write a function to calculate
       //How the player launches an attack
+      if (this.bot === false) {
+        this.enemyBoard.receiveAttack(row, column);
+      } else if (this.bot === true) {
+        this.enemyBoard.receiveAttack(
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10)
+        );
+      }
     },
   };
 }
@@ -199,12 +208,19 @@ player.myboard = playerBoard;
 player.enemyBoard = computerBoard;
 computer.myboard = computerBoard;
 computer.enemyBoard = playerBoard;
+computer.bot = true;
 
-playerBoard.receiveAttack(0, 0);
-computerBoard.receiveAttack(0, 1);
-console.log(player.myboard.board);
-console.log(computer.enemyBoard.board);
+player.attack(0, 0);
+computer.attack();
+console.log(playerBoard);
+
 //factory functions-------------------------------------------------------
+//GAME START
+gameLoop();
+function gameLoop() {}
+
+function gameStart() {}
+
 function checkForShip(grid, row, column, length, direction) {
   //Loops through and checks every spot that a ship would potentially be placed,
   //returns true if each space is open and false if any are occupied.
@@ -235,8 +251,3 @@ function checkForShip(grid, row, column, length, direction) {
 
   return flag;
 }
-//GAME START
-gameLoop();
-function gameLoop() {}
-
-function gameStart() {}
