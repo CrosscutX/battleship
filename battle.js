@@ -1,5 +1,5 @@
 "use strict";
-module.exports = { Ship: Ship, Gameboard: Gameboard, Player: Player };
+module.exports = { Ship, Gameboard, Player };
 //factory functions-----------------------------------------------
 function Ship(name, length) {
   return {
@@ -73,7 +73,6 @@ function Gameboard() {
             flag = true;
             row++;
           } else if (grid[row][column] !== "O") {
-            console.log("Check for ship is false");
             flag = false;
             return;
           }
@@ -230,20 +229,6 @@ function Player() {
   };
 }
 
-const player = Player();
-const computer = Player();
-const playerBoard = Gameboard();
-const computerBoard = Gameboard();
-player.myboard = playerBoard;
-player.enemyBoard = computerBoard;
-computer.myboard = computerBoard;
-computer.enemyBoard = playerBoard;
-computer.bot = true;
-
-player.attack(0, 0);
-computer.attack();
-console.log(playerBoard);
-
 //factory functions-------------------------------------------------------
 //GAME START
 gameLoop();
@@ -251,7 +236,9 @@ function gameLoop() {
   gameStart();
 }
 
-function gameStart() {}
+function gameStart() {
+  console.log("gamestart is working");
+}
 
 function gameEnd(player) {
   if (player.enemyBoard.checkGameEnd() === true) {
