@@ -1,5 +1,4 @@
 "use strict";
-module.exports = { Ship, Gameboard, Player };
 //factory functions-----------------------------------------------
 function Ship(name, length) {
   return {
@@ -228,9 +227,8 @@ function Player() {
     },
   };
 }
-
-//factory functions-------------------------------------------------------
-//GAME START
+//FACTORY FUNCTIONS END-------------------------------------------------------
+//GAME START--------------------------------------------------------------
 gameLoop();
 function gameLoop() {
   gameStart();
@@ -246,3 +244,7 @@ function gameEnd(player) {
     console.log(player.name + " is the winner!");
   }
 }
+//GAME END-------------------------------------------------
+//CLICK EVENTS---------------------------------------------
+
+module.exports = { Ship, Gameboard, Player };
