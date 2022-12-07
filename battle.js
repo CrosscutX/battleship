@@ -1,6 +1,7 @@
 "use strict";
+
 //factory functions-----------------------------------------------
-function Ship(name, length) {
+export function Ship(name, length) {
   return {
     name: name,
     length: length,
@@ -21,7 +22,7 @@ function Ship(name, length) {
   };
 }
 
-function Gameboard() {
+export function Gameboard() {
   //create an array that mimics battleship board.
   let board = [];
   for (let i = 0; i < 10; i++) {
@@ -206,7 +207,7 @@ function Gameboard() {
   };
 }
 
-function Player() {
+export function Player() {
   return {
     name: "",
     myboard: "",
@@ -227,24 +228,3 @@ function Player() {
     },
   };
 }
-//FACTORY FUNCTIONS END-------------------------------------------------------
-//GAME START--------------------------------------------------------------
-gameLoop();
-function gameLoop() {
-  gameStart();
-}
-
-function gameStart() {
-  console.log("gamestart is working");
-}
-
-function gameEnd(player) {
-  if (player.enemyBoard.checkGameEnd() === true) {
-    //Code to display a winner
-    console.log(player.name + " is the winner!");
-  }
-}
-//GAME END-------------------------------------------------
-//CLICK EVENTS---------------------------------------------
-
-module.exports = { Ship, Gameboard, Player };
