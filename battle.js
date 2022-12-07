@@ -51,6 +51,36 @@ function Gameboard() {
         this.direction = "horizontal";
       }
     },
+
+    checkForShip(grid, row, column, length, direction) {
+      //Loops through and checks every spot that a ship would potentially be placed,
+      //returns true if each space is open and false if any are occupied.
+      let flag = true;
+      if (direction === "horizontal") {
+        for (let i = 0; i < length; i++) {
+          if (grid[row][column] === "O") {
+            flag = true;
+            column++;
+          } else if (grid[row][column] !== "O") {
+            flag = false;
+            return;
+          }
+        }
+      }
+      if (direction === "vertical") {
+        for (let i = 0; i < length; i++) {
+          if (grid[row][column] === "O") {
+            flag = true;
+            row++;
+          } else if (grid[row][column] !== "O") {
+            console.log("Check for ship is false");
+            flag = false;
+            return;
+          }
+        }
+      }
+      return flag;
+    },
     //Places a ship input into the board array based on the length of the ship
     placeShips(row, column, length, ship) {
       //Add the ship that's passed to the ships array
@@ -66,7 +96,7 @@ function Gameboard() {
         return;
       }
 
-      let shipCheck = checkForShip(
+      let shipCheck = this.checkForShip(
         this.board,
         row,
         column,
@@ -217,37 +247,15 @@ console.log(playerBoard);
 //factory functions-------------------------------------------------------
 //GAME START
 gameLoop();
-function gameLoop() {}
+function gameLoop() {
+  gameStart();
+}
 
 function gameStart() {}
 
-function checkForShip(grid, row, column, length, direction) {
-  //Loops through and checks every spot that a ship would potentially be placed,
-  //returns true if each space is open and false if any are occupied.
-  let flag = true;
-  if (direction === "horizontal") {
-    for (let i = 0; i < length; i++) {
-      if (grid[row][column] === "O") {
-        flag = true;
-        column++;
-      } else if (grid[row][column] !== "O") {
-        flag = false;
-        return;
-      }
-    }
+function gameEnd(player) {
+  if (player.enemyBoard.checkGameEnd() === true) {
+    //Code to display a winner
+    console.log(player.name + " is the winner!");
   }
-  if (direction === "vertical") {
-    for (let i = 0; i < length; i++) {
-      if (grid[row][column] === "O") {
-        flag = true;
-        row++;
-      } else if (grid[row][column] !== "O") {
-        console.log("Check for ship is false");
-        flag = false;
-        return;
-      }
-    }
-  }
-
-  return flag;
 }
