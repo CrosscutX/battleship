@@ -17,11 +17,70 @@
     <div class="name-screen">
       <div class="name-box">
         <label for="name">Enter Your Name Commander</label>
-        <input type="text" id="name" required />
+        <input type="text" id="name" class="name" required />
         <div class="start-button button">Start</div>
       </div>
     </div>
-    <div class="game-screen"></div>
+    <div class="game-screen">
+      <div class="boards">
+        <div class="left-container">
+          <h2>Player Board</h2>
+          <div class="player-board">
+            <!--Top Row-->
+            <div class="row">
+              <div class="board-space board-space-label"></div>
+              <div class="board-space board-space-label">A</div>
+              <div class="board-space board-space-label">B</div>
+              <div class="board-space board-space-label">C</div>
+              <div class="board-space board-space-label">D</div>
+              <div class="board-space board-space-label">E</div>
+              <div class="board-space board-space-label">F</div>
+              <div class="board-space board-space-label">G</div>
+              <div class="board-space board-space-label">H</div>
+              <div class="board-space board-space-label">I</div>
+              <div class="board-space board-space-label">J</div>
+            </div>
+            <!--Row 1-->
+            <div class="row">
+              <div class="board-space board-space-label">1</div>
+              <div class="board-space" data-r="0" data-c="0"></div>
+              <div class="board-space" data-r="0" data-c="1"></div>
+              <div class="board-space" data-r="0" data-c="2"></div>
+              <div class="board-space" data-r="0" data-c="3"></div>
+              <div class="board-space" data-r="0" data-c="4"></div>
+              <div class="board-space" data-r="0" data-c="5"></div>
+              <div class="board-space" data-r="0" data-c="6"></div>
+              <div class="board-space" data-r="0" data-c="7"></div>
+              <div class="board-space" data-r="0" data-c="8"></div>
+              <div class="board-space" data-r="0" data-c="9"></div>
+            </div>
+            <!--Row 2-->
+            <div class="row">
+              <div class="board-space board-space-label">2</div>
+              <div class="board-space" data-r="1" data-c="0"></div>
+              <div class="board-space" data-r="1" data-c="1"></div>
+              <div class="board-space" data-r="1" data-c="2"></div>
+              <div class="board-space" data-r="1" data-c="3"></div>
+              <div class="board-space" data-r="1" data-c="4"></div>
+              <div class="board-space" data-r="1" data-c="5"></div>
+              <div class="board-space" data-r="1" data-c="6"></div>
+              <div class="board-space" data-r="1" data-c="7"></div>
+              <div class="board-space" data-r="1" data-c="8"></div>
+              <div class="board-space" data-r="1" data-c="9"></div>
+            </div>
+            <!--Row 3-->
+            <!--Row 4-->
+            <!--Row 5-->
+            <!--Row 6-->
+            <!--Row 7-->
+            <!--Row 8-->
+            <!--Row 9-->
+            <!--Row 10-->
+          </div>
+        </div>
+        <div class="computer-board"></div>
+      </div>
+    </div>
     <div class="finish-screen"></div>
 
     <script type="module" src="main.js" defer></script>
