@@ -43,7 +43,7 @@ header {
 /*Name Page*/
 
 .name-screen {
-  display: none;
+  display: flex;
   justify-content: center;
   margin-top: 3rem;
 }
@@ -81,7 +81,7 @@ header {
 /*Name Page end*/
 
 .game-screen {
-  display: flex;
+  display: none;
   flex-direction: column;
   margin-top: 3rem;
 }
