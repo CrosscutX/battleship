@@ -12,6 +12,7 @@ function gameLoop() {
 function gameStart() {
   const namePage = document.querySelector(".name-screen");
   const gamePage = document.querySelector(".game-screen");
+  const finishPage = document.querySelector(".finish-screen");
   const restartBtn = document.querySelector(".restart-button");
   const startBtn = document.querySelector(".start-button");
 

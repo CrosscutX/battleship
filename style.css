@@ -81,11 +81,12 @@ header {
 /*Name Page end*/
 
 .game-screen {
-  margin-top: 5rem;
+  margin-top: 7rem;
 }
 
 .boards {
   display: flex;
+  justify-content: space-around;
   font-size: 2rem;
   padding: 1rem;
 }
