@@ -134,8 +134,13 @@ header {
   height: 45px;
 }
 /*Allows the board to glow blue on hover, except for the labeled board spaces*/
-.board-space:not(.board-space-label):hover {
+.right-container .board-space:not(.board-space-label):hover {
   background-color: blue;
+  transition: 0.2s;
+}
+
+.placement {
+  background-color: blueviolet;
   transition: 0.2s;
 }
 

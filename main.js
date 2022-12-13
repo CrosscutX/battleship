@@ -61,19 +61,45 @@ function gameStart() {
 
 //Ship setup--------------------------------------------------------
 let currentShip = "Carrier";
-let playerBoardSpaces = [];
+let playerBoardSpaces = "";
 
 function shipSetup() {
+  addShipHover();
   selectPlayerBoardForShip(placeCarrier);
+}
+
+function addShipHover() {
+  playerBoardSpaces = document.querySelectorAll(
+    ".player-board .row .board-space:not(.board-space-label)"
+  );
+
+  playerBoardSpaces.forEach((space) => {
+    space.addEventListener("mouseover", addHoverClass);
+  });
+
+  playerBoardSpaces.forEach((space) => {
+    space.addEventListener("mouseleave", removeHoverClass);
+  });
+}
+
+function addHoverClass(e) {
+  const space = e.target;
+  console.log(space.getAttribute("class"));
+  space.classList.add("placement");
+}
+
+function removeHoverClass(e) {
+  const space = e.target;
+  space.classList.remove("placement");
 }
 
 function selectPlayerBoardForShip(func) {
   playerBoardSpaces = document.querySelectorAll(
-    ".player-board .row .board-space"
+    ".player-board .row .board-space:not(.board-space-label)"
   );
-
+  //Click event listeners to start the place ship chain
   playerBoardSpaces.forEach((space) => {
-    space.removeEventListener("click", placeCarrier);
+    space.removeEventListener("click", func);
   });
 
   playerBoardSpaces.forEach((space) => {
