@@ -2,7 +2,7 @@
 const battle = require("./battle");
 //Ship function tests
 test("Create ship increments hits properly", () => {
-  const newShip = battle.Ship(5);
+  const newShip = battle.Ship("Carrier", 5);
   newShip.hit();
   expect(newShip.hits).toEqual(1);
 });

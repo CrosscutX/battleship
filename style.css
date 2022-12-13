@@ -125,3 +125,12 @@ header {
   width: 40px;
   height: 45px;
 }
+
+.board-space:hover {
+  background-color: blue;
+  transition: 0.2s;
+}
+
+.ship-space {
+  background-color: green;
+}
