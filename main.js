@@ -3,7 +3,7 @@ import { Ship, Gameboard, Player } from "./battle.js";
 //GAME START--------------------------------------------------------------
 let coordinates = [null, null];
 let playerName = document.querySelector(".name");
-const infoText = document.querySelector(".info-text");
+let infoText = document.querySelector(".info-text");
 const namePage = document.querySelector(".name-screen");
 const gamePage = document.querySelector(".game-screen");
 const restartBtn = document.querySelector(".restart-button");
@@ -61,24 +61,37 @@ function gameStart() {
 
 //Ship setup--------------------------------------------------------
 let currentShip = "Carrier";
-let playerBoardSpaces = "";
+let playerBoardSpaces = [];
+
 function shipSetup() {
-  selectPlayerBoardForCarrier();
+  selectPlayerBoardForShip(placeCarrier);
 }
 
-function selectPlayerBoardForCarrier() {
+function selectPlayerBoardForShip(func) {
   playerBoardSpaces = document.querySelectorAll(
     ".player-board .row .board-space"
   );
-  //Remove original click event listeners before adding them again to avoid
-  //duplicate event listeners
+
   playerBoardSpaces.forEach((space) => {
     space.removeEventListener("click", placeCarrier);
   });
 
   playerBoardSpaces.forEach((space) => {
-    space.addEventListener("click", placeCarrier);
+    space.addEventListener("click", func);
   });
+}
+//Checks if ship can't be placed, and then reselects it for placement
+function checkInvalidSpace(board, row, column, length, ship, func) {
+  if (
+    board.placeShips(row, column, length, ship) === "Invalid board position"
+  ) {
+    selectPlayerBoardForShip(func);
+    infoText.textContent = "Invalid Space";
+    return false;
+  } else {
+    console.log(playerBoard);
+    infoText.textContent = "Place Your Battleship";
+  }
 }
 //Click event function for ship placement
 function placeCarrier(e) {
@@ -89,8 +102,23 @@ function placeCarrier(e) {
   //Convert the data attributes to numbers so placeShips() works
   row = Number(row);
   column = Number(column);
+  //Check if the space is valid
+  if (
+    checkInvalidSpace(
+      playerBoard,
+      row,
+      column,
+      playerCarrier.length,
+      playerCarrier,
+      placeCarrier
+    ) === false
+  ) {
+    return;
+  }
 
-  playerBoard.placeShips(row, column, playerCarrier.length, playerCarrier);
+  playerBoardSpaces.forEach((space) => {
+    space.removeEventListener("click", placeCarrier);
+  });
 }
 
 function placeBattleship() {}

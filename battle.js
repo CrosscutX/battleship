@@ -82,8 +82,6 @@ export function Gameboard() {
     },
     //Places a ship input into the board array based on the length of the ship
     placeShips(row, column, length, ship) {
-      //Add the ship that's passed to the ships array
-      this.ships.push(ship);
       //Check if a horizontal ship is placed too far right
       if (column + length > 10 && this.direction === "horizontal") {
         console.log("Invalid board position");
@@ -102,6 +100,9 @@ export function Gameboard() {
         length,
         this.direction
       );
+
+      //Add the ship that's passed to the ships array
+      this.ships.push(ship);
       //Lay ships on the grid to the right when direction is horizontal
       //Different letters are applied to the array based on the boat
       if (this.direction === "horizontal" && shipCheck === true) {
