@@ -48,45 +48,60 @@ function gameStart() {
   player.enemyBoard = computerBoard;
 
   computer.name = "Computer";
+
   computer.myboard = computerBoard;
   computer.enemyBoard = playerBoard;
   computer.bot = true;
   //Board Objects
   playerBoard.player = playerName;
   computerBoard.player = "Computer";
-  console.log(player);
 }
 
 //Game Start End--------------------------------------------------
 
 //Ship setup--------------------------------------------------------
 let currentShip = "Carrier";
-
+let playerBoardSpaces = "";
 function shipSetup() {
-  selectPlayerBoardForPlacement();
+  selectPlayerBoardForCarrier();
 }
 
-function selectPlayerBoardForPlacement() {
-  const playerBoardSpaces = document.querySelectorAll(
+function selectPlayerBoardForCarrier() {
+  playerBoardSpaces = document.querySelectorAll(
     ".player-board .row .board-space"
   );
   //Remove original click event listeners before adding them again to avoid
   //duplicate event listeners
   playerBoardSpaces.forEach((space) => {
-    space.removeEventListener("click", placeShip);
+    space.removeEventListener("click", placeCarrier);
   });
 
   playerBoardSpaces.forEach((space) => {
-    space.addEventListener("click", placeShip);
+    space.addEventListener("click", placeCarrier);
   });
 }
 //Click event function for ship placement
-function placeShip(e) {
+function placeCarrier(e) {
+  const playerCarrier = Ship("Carrier", 5);
   const space = e.target;
-  const row = e.target.attributes["data-r"].value;
-  const column = e.target.attributes["data-c"].value;
-  console.log(e.target);
+  let row = e.target.attributes["data-r"].value;
+  let column = e.target.attributes["data-c"].value;
+  //Convert the data attributes to numbers so placeShips() works
+  row = Number(row);
+  column = Number(column);
+
+  playerBoard.placeShips(row, column, playerCarrier.length, playerCarrier);
 }
+
+function placeBattleship() {}
+
+function placeDestroyer() {}
+
+function placeSubmarine() {}
+
+function placeBoat() {}
+
+function placeBotShips() {}
 
 //Ship Setup End-------------------------------------------------
 

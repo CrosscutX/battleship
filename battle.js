@@ -37,7 +37,7 @@ export function Gameboard() {
     ships: [],
     direction: "horizontal",
     board: board,
-    addShipToBoard(ship) {
+    addShipToArray(ship) {
       this.ships.push(ship);
     },
     updateMiss() {
@@ -87,12 +87,12 @@ export function Gameboard() {
       //Check if a horizontal ship is placed too far right
       if (column + length > 10 && this.direction === "horizontal") {
         console.log("Invalid board position");
-        return;
+        return "Invalid board position";
       }
       //Check if a vertical ship is placed too far down
       if (row + length > 10 && this.direction === "vertical") {
-        console.log("invalid board position");
-        return;
+        console.log("Invalid board position");
+        return "Invalid board position";
       }
 
       let shipCheck = this.checkForShip(
