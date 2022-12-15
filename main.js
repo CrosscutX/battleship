@@ -184,11 +184,103 @@ function placeBattleship(e) {
   selectPlayerBoardForShip(placeDestroyer);
 }
 
-function placeDestroyer(e) {}
+function placeDestroyer(e) {
+  const playerDestroyer = Ship("Destroyer", 3);
+  const space = e.target;
+  let row = space.attributes["data-r"].value;
+  let column = space.attributes["data-c"].value;
+  //Convert the data attributes to numbers so placeShips() works
+  row = Number(row);
+  column = Number(column);
+  //Check if the space is valid
+  if (
+    checkInvalidSpace(
+      playerBoard,
+      row,
+      column,
+      playerDestroyer.length,
+      playerDestroyer,
+      placeDestroyer
+    ) === false
+  ) {
+    return;
+  }
 
-function placeSubmarine(e) {}
+  addShipClass();
+  //Deselect current click event listeners
+  playerBoardSpaces.forEach((space) => {
+    space.removeEventListener("click", placeDestroyer);
+  });
 
-function placeBoat(e) {}
+  infoText.textContent = "Place Your Submarine";
+  currentShip = "submarine";
+  selectPlayerBoardForShip(placeSubmarine);
+}
+
+function placeSubmarine(e) {
+  const playerSubmarine = Ship("Submarine", 3);
+  const space = e.target;
+  let row = space.attributes["data-r"].value;
+  let column = space.attributes["data-c"].value;
+  //Convert the data attributes to numbers so placeShips() works
+  row = Number(row);
+  column = Number(column);
+  //Check if the space is valid
+  if (
+    checkInvalidSpace(
+      playerBoard,
+      row,
+      column,
+      playerSubmarine.length,
+      playerSubmarine,
+      placeSubmarine
+    ) === false
+  ) {
+    return;
+  }
+
+  addShipClass();
+  //Deselect current click event listeners
+  playerBoardSpaces.forEach((space) => {
+    space.removeEventListener("click", placeSubmarine);
+  });
+
+  infoText.textContent = "Place Your Patrol Boat";
+  currentShip = "patrol boat";
+  selectPlayerBoardForShip(placeBoat);
+}
+
+function placeBoat(e) {
+  const playerBoat = Ship("Patrol Boat", 2);
+  const space = e.target;
+  let row = space.attributes["data-r"].value;
+  let column = space.attributes["data-c"].value;
+  //Convert the data attributes to numbers so placeShips() works
+  row = Number(row);
+  column = Number(column);
+  //Check if the space is valid
+  if (
+    checkInvalidSpace(
+      playerBoard,
+      row,
+      column,
+      playerBoat.length,
+      playerBoat,
+      placeBoat
+    ) === false
+  ) {
+    return;
+  }
+
+  addShipClass();
+  //Deselect current click event listeners
+  playerBoardSpaces.forEach((space) => {
+    space.removeEventListener("click", placeBoat);
+  });
+
+  infoText.textContent = "Attack";
+  currentShip = "attack";
+}
 
 function placeBotShips() {}
 
@@ -316,7 +408,7 @@ function addHoverClass(e) {
     if (space3 != null) {
       space3.classList.add("placement");
     }
-  } else if (currentShip === "partrol boat") {
+  } else if (currentShip === "patrol boat") {
     if (space2 != null) {
       space2.classList.add("placement");
     }
