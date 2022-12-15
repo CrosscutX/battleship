@@ -21,7 +21,7 @@ restartBtn.addEventListener("click", () => {
 });
 
 startBtn.addEventListener("click", () => {
-  gameLoop();
+  gameStart();
 });
 
 rotateBtn.addEventListener("click", () => {
@@ -31,13 +31,6 @@ rotateBtn.addEventListener("click", () => {
 
 //Button click events end--------------------------------------
 
-//Controls the flow of the game, from start to finish
-function gameLoop() {
-  gameStart();
-  shipSetup();
-}
-
-//Game Loop End-----------------------------------------------------
 //Game Start, Start-------------------------------------------------
 function gameStart() {
   //Reveal the game page, get the value on the textbox and display it above
@@ -64,6 +57,7 @@ function gameStart() {
   //Board Objects
   playerBoard.player = playerName;
   computerBoard.player = "Computer";
+  shipSetup();
 }
 
 //Game Start End--------------------------------------------------
@@ -270,6 +264,8 @@ function placeBoat(e) {
   playerBoardSpaces.forEach((space) => {
     space.removeEventListener("mouseover", addHoverClass);
   });
+  //Start next game phase
+  attackStart();
 }
 
 function placeBotShips() {}
@@ -474,6 +470,14 @@ function addShipClass() {
 }
 
 //Ship Setup End-------------------------------------------------
+
+//Attack Start----------------------------------------------------
+
+function attackStart() {
+  console.log("attack start");
+}
+
+//Attack End------------------------------------------------------
 
 function gameEnd(player) {
   if (player.enemyBoard.checkGameEnd() === true) {
