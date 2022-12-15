@@ -84,12 +84,10 @@ export function Gameboard() {
     placeShips(row, column, length, ship) {
       //Check if a horizontal ship is placed too far right
       if (column + length > 10 && this.direction === "horizontal") {
-        console.log("Invalid board position");
         return "Invalid board position";
       }
       //Check if a vertical ship is placed too far down
       if (row + length > 10 && this.direction === "vertical") {
-        console.log("Invalid board position");
         return "Invalid board position";
       }
 
