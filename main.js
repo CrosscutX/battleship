@@ -140,6 +140,8 @@ function placeCarrier(e) {
     return;
   }
 
+  addShipClass();
+  //Deselect current click event listeners
   playerBoardSpaces.forEach((space) => {
     space.removeEventListener("click", placeCarrier);
   });
@@ -171,6 +173,7 @@ function placeBattleship(e) {
     return;
   }
 
+  addShipClass();
   //Deselect current click event listeners
   playerBoardSpaces.forEach((space) => {
     space.removeEventListener("click", placeBattleship);
@@ -337,6 +340,40 @@ function removeHoverClass() {
 
   if (space5 != null) {
     space5.classList.remove("placement");
+  }
+}
+
+function addShipClass() {
+  if (currentShip === "carrier") {
+    space1.classList.add("ship-space");
+    space2.classList.add("ship-space");
+    space3.classList.add("ship-space");
+    space4.classList.add("ship-space");
+    space5.classList.add("ship-space");
+  }
+
+  if (currentShip === "battleship") {
+    space1.classList.add("ship-space");
+    space2.classList.add("ship-space");
+    space3.classList.add("ship-space");
+    space4.classList.add("ship-space");
+  }
+
+  if (currentShip === "destroyer") {
+    space1.classList.add("ship-space");
+    space2.classList.add("ship-space");
+    space3.classList.add("ship-space");
+  }
+
+  if (currentShip === "submarine") {
+    space1.classList.add("ship-space");
+    space2.classList.add("ship-space");
+    space3.classList.add("ship-space");
+  }
+
+  if (currentShip === "patrol boat") {
+    space1.classList.add("ship-space");
+    space2.classList.add("ship-space");
   }
 }
 
