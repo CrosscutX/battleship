@@ -78,20 +78,6 @@ function shipSetup() {
   selectPlayerBoardForShip(placeCarrier);
 }
 
-function addShipHover() {
-  playerBoardSpaces = document.querySelectorAll(
-    ".player-board .row .board-space:not(.board-space-label)"
-  );
-
-  playerBoardSpaces.forEach((space) => {
-    space.addEventListener("mouseover", addHoverClass);
-  });
-
-  playerBoardSpaces.forEach((space) => {
-    space.addEventListener("mouseleave", removeHoverClass);
-  });
-}
-
 function selectPlayerBoardForShip(func) {
   playerBoardSpaces = document.querySelectorAll(
     ".player-board .row .board-space:not(.board-space-label)"
@@ -277,9 +263,13 @@ function placeBoat(e) {
   playerBoardSpaces.forEach((space) => {
     space.removeEventListener("click", placeBoat);
   });
-
+  //Prep infotext for actual game
   infoText.textContent = "Attack";
   currentShip = "attack";
+  //Get rid of hover event listener for player board
+  playerBoardSpaces.forEach((space) => {
+    space.removeEventListener("mouseover", addHoverClass);
+  });
 }
 
 function placeBotShips() {}
@@ -289,6 +279,20 @@ When hoving on an element this function identifies an board space when the user
 mouses inside, and then adds the placement class to that element and it's sister
 elements based on which ship is currently being placed in the "currentShip" variable
 */
+function addShipHover() {
+  playerBoardSpaces = document.querySelectorAll(
+    ".player-board .row .board-space:not(.board-space-label)"
+  );
+
+  playerBoardSpaces.forEach((space) => {
+    space.addEventListener("mouseover", addHoverClass);
+  });
+
+  playerBoardSpaces.forEach((space) => {
+    space.addEventListener("mouseleave", removeHoverClass);
+  });
+}
+
 let space1 = "";
 let space2 = "";
 let space3 = "";
@@ -437,35 +441,35 @@ function removeHoverClass() {
 
 function addShipClass() {
   if (currentShip === "carrier") {
-    space1.classList.add("ship-space");
-    space2.classList.add("ship-space");
-    space3.classList.add("ship-space");
-    space4.classList.add("ship-space");
-    space5.classList.add("ship-space");
+    space1.classList.add("ship-space-carrier");
+    space2.classList.add("ship-space-carrier");
+    space3.classList.add("ship-space-carrier");
+    space4.classList.add("ship-space-carrier");
+    space5.classList.add("ship-space-carrier");
   }
 
   if (currentShip === "battleship") {
-    space1.classList.add("ship-space");
-    space2.classList.add("ship-space");
-    space3.classList.add("ship-space");
-    space4.classList.add("ship-space");
+    space1.classList.add("ship-space-battleship");
+    space2.classList.add("ship-space-battleship");
+    space3.classList.add("ship-space-battleship");
+    space4.classList.add("ship-space-battleship");
   }
 
   if (currentShip === "destroyer") {
-    space1.classList.add("ship-space");
-    space2.classList.add("ship-space");
-    space3.classList.add("ship-space");
+    space1.classList.add("ship-space-destroyer");
+    space2.classList.add("ship-space-destroyer");
+    space3.classList.add("ship-space-destroyer");
   }
 
   if (currentShip === "submarine") {
-    space1.classList.add("ship-space");
-    space2.classList.add("ship-space");
-    space3.classList.add("ship-space");
+    space1.classList.add("ship-space-submarine");
+    space2.classList.add("ship-space-submarine");
+    space3.classList.add("ship-space-submarine");
   }
 
   if (currentShip === "patrol boat") {
-    space1.classList.add("ship-space");
-    space2.classList.add("ship-space");
+    space1.classList.add("ship-space-boat");
+    space2.classList.add("ship-space-boat");
   }
 }
 

@@ -24,6 +24,10 @@ h2 {
   border-radius: 8px;
   cursor: pointer;
 }
+
+.button:hover {
+  background-color: rgb(19, 19, 144);
+}
 /*Header*/
 header {
   display: flex;
@@ -144,6 +148,22 @@ header {
   transition: 0.2s;
 }
 
-.ship-space {
-  background-color: rgb(42, 193, 42);
+.ship-space-carrier {
+  background-color: rgb(57, 124, 57);
+}
+
+.ship-space-battleship {
+  background-color: rgb(19, 19, 144);
+}
+
+.ship-space-destroyer {
+  background-color: rgb(189, 126, 24);
+}
+
+.ship-space-submarine {
+  background-color: rgb(182, 39, 120);
+}
+
+.ship-space-boat {
+  background-color: rgb(44, 149, 149);
 }
