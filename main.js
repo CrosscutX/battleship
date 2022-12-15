@@ -98,6 +98,10 @@ function selectPlayerBoardForShip(func) {
   );
   //Click event listeners to add each specific ship click function
   playerBoardSpaces.forEach((space) => {
+    space.removeEventListener("click", func);
+  });
+
+  playerBoardSpaces.forEach((space) => {
     space.addEventListener("click", func);
   });
 }
@@ -146,7 +150,7 @@ function placeCarrier(e) {
 }
 
 function placeBattleship(e) {
-  const playerBattleship = Ship("Battleship", 5);
+  const playerBattleship = Ship("Battleship", 4);
   const space = e.target;
   let row = space.attributes["data-r"].value;
   let column = space.attributes["data-c"].value;

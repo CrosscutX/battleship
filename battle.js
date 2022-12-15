@@ -55,7 +55,8 @@ export function Gameboard() {
     checkForShip(grid, row, column, length, direction) {
       //Loops through and checks every spot that a ship would potentially be placed,
       //returns true if each space is open and false if any are occupied.
-      let flag = true;
+
+      let flag = "";
       if (direction === "horizontal") {
         for (let i = 0; i < length; i++) {
           if (grid[row][column] === "O") {
@@ -63,7 +64,7 @@ export function Gameboard() {
             column++;
           } else if (grid[row][column] !== "O") {
             flag = false;
-            return;
+            return flag;
           }
         }
       }
@@ -74,7 +75,7 @@ export function Gameboard() {
             row++;
           } else if (grid[row][column] !== "O") {
             flag = false;
-            return;
+            return flag;
           }
         }
       }
@@ -98,7 +99,10 @@ export function Gameboard() {
         length,
         this.direction
       );
-
+      console.log(shipCheck);
+      if (shipCheck === false) {
+        return "Invalid board position";
+      }
       //Add the ship that's passed to the ships array
       this.ships.push(ship);
       //Lay ships on the grid to the right when direction is horizontal
