@@ -37,9 +37,7 @@ export function Gameboard() {
     ships: [],
     direction: "horizontal",
     board: board,
-    addShipToArray(ship) {
-      this.ships.push(ship);
-    },
+
     updateMiss() {
       this.misses++;
     },
@@ -99,7 +97,6 @@ export function Gameboard() {
         length,
         this.direction
       );
-      console.log(shipCheck);
       if (shipCheck === false) {
         return "Invalid board position";
       }

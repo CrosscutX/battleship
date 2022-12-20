@@ -9,6 +9,7 @@ const gamePage = document.querySelector(".game-screen");
 const restartBtn = document.querySelector(".restart-button");
 const startBtn = document.querySelector(".start-button");
 const rotateBtn = document.querySelector(".rotate-button");
+const fireBtn = document.querySelector(".fire-button");
 const playerBoardName = document.querySelector(".left-container h2");
 //Define the players that we'll be using for the game
 const player = Player();
@@ -25,7 +26,6 @@ startBtn.addEventListener("click", () => {
 });
 
 rotateBtn.addEventListener("click", () => {
-  console.log("in rotate button");
   playerBoard.swapDirection();
 });
 
@@ -94,7 +94,7 @@ function checkInvalidSpace(board, row, column, length, ship, func) {
     infoText.textContent = "Invalid Space";
     return false;
   } else {
-    console.log(playerBoard);
+    return true;
   }
 }
 //Click event function for ship placement
@@ -119,7 +119,7 @@ function placeCarrier(e) {
   ) {
     return;
   }
-
+  //If valid, adds the ship with the addShipClass function
   addShipClass();
   //Deselect current click event listeners
   playerBoardSpaces.forEach((space) => {
@@ -260,15 +260,31 @@ function placeBoat(e) {
   //Prep infotext for actual game
   infoText.textContent = "Attack";
   currentShip = "attack";
+  rotateBtn.style.display = "none";
+  fireBtn.style.display = "flex";
+
   //Get rid of hover event listener for player board
   playerBoardSpaces.forEach((space) => {
     space.removeEventListener("mouseover", addHoverClass);
   });
+  //Have the bot randomly place ships
+  placeBotShips();
   //Start next game phase
   attackStart();
 }
 
-function placeBotShips() {}
+function placeBotShips() {
+  const computerCarrier = Ship("Carrier", 5);
+  const computerBattleship = Ship("Battleship", 4);
+  const computerDestroyer = Ship("Destroyer", 3);
+  const computerSubmarine = Ship("Submarine", 3);
+  const computerBoat = Ship("Patrol Boat", 2);
+
+  console.log(player);
+  console.log(playerBoard);
+  console.log(computer);
+  console.log(computerBoard);
+}
 
 /*
 When hoving on an element this function identifies an board space when the user
@@ -473,9 +489,7 @@ function addShipClass() {
 
 //Attack Start----------------------------------------------------
 
-function attackStart() {
-  console.log("attack start");
-}
+function attackStart() {}
 
 //Attack End------------------------------------------------------
 
