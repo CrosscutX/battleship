@@ -280,10 +280,48 @@ function placeBotShips() {
   const computerSubmarine = Ship("Submarine", 3);
   const computerBoat = Ship("Patrol Boat", 2);
 
-  console.log(player);
-  console.log(playerBoard);
+  checkBotShips(
+    randomNum(),
+    randomNum(),
+    computerCarrier.length,
+    computerCarrier
+  );
+  checkBotShips(
+    randomNum(),
+    randomNum(),
+    computerBattleship.length,
+    computerBattleship
+  );
+  checkBotShips(
+    randomNum(),
+    randomNum(),
+    computerDestroyer.length,
+    computerDestroyer
+  );
+  checkBotShips(
+    randomNum(),
+    randomNum(),
+    computerSubmarine.length,
+    computerSubmarine
+  );
+  checkBotShips(randomNum(), randomNum(), computerBoat.length, computerBoat);
   console.log(computer);
   console.log(computerBoard);
+}
+//random number 0-9 for ship placement
+function randomNum() {
+  return Math.floor(Math.random() * 10);
+}
+
+function checkBotShips(row, column, length, ship) {
+  if (
+    computerBoard.placeShips(row, column, length, ship) !==
+    "Invalid board position"
+  ) {
+    return;
+  } else {
+    checkBotShips(randomNum(), randomNum(), length, ship);
+  }
 }
 
 /*
