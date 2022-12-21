@@ -274,36 +274,47 @@ function placeBoat(e) {
 }
 
 function placeBotShips() {
+  const computerDirection = ["horizontal", "vertical"];
   const computerCarrier = Ship("Carrier", 5);
   const computerBattleship = Ship("Battleship", 4);
   const computerDestroyer = Ship("Destroyer", 3);
   const computerSubmarine = Ship("Submarine", 3);
   const computerBoat = Ship("Patrol Boat", 2);
-
+  //Randomly pick whether the ship is placed horizontal or vertically
+  //Then check if the ship spot is valid and then place it
+  computerBoard.direction = computerDirection[Math.floor(Math.random() * 2)];
   checkBotShips(
     randomNum(),
     randomNum(),
     computerCarrier.length,
     computerCarrier
   );
+
+  computerBoard.direction = computerDirection[Math.floor(Math.random() * 2)];
   checkBotShips(
     randomNum(),
     randomNum(),
     computerBattleship.length,
     computerBattleship
   );
+
+  computerBoard.direction = computerDirection[Math.floor(Math.random() * 2)];
   checkBotShips(
     randomNum(),
     randomNum(),
     computerDestroyer.length,
     computerDestroyer
   );
+
+  computerBoard.direction = computerDirection[Math.floor(Math.random() * 2)];
   checkBotShips(
     randomNum(),
     randomNum(),
     computerSubmarine.length,
     computerSubmarine
   );
+
+  computerBoard.direction = computerDirection[Math.floor(Math.random() * 2)];
   checkBotShips(randomNum(), randomNum(), computerBoat.length, computerBoat);
   console.log(computer);
   console.log(computerBoard);
@@ -312,7 +323,8 @@ function placeBotShips() {
 function randomNum() {
   return Math.floor(Math.random() * 10);
 }
-
+//Recursive function to check if a position is invalid, and if it is then to
+//call the function again.
 function checkBotShips(row, column, length, ship) {
   if (
     computerBoard.placeShips(row, column, length, ship) !==
