@@ -539,7 +539,11 @@ function addShipClass() {
 
 //Attack Start----------------------------------------------------
 
-function attackStart() {}
+function attackStart() {
+  playerAttack();
+}
+
+function playerAttack() {}
 
 //Attack End------------------------------------------------------
 

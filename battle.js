@@ -212,7 +212,6 @@ export function Player() {
     name: "",
     myboard: "",
     enemyBoard: "",
-    turn: false,
     bot: false,
     attack(row, column) {
       //Find out if the player is a bot, then write a function to calculate
