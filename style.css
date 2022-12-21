@@ -142,7 +142,7 @@ header {
   background-color: blue;
   transition: 0.2s;
 }
-
+/*Classes for placing ships phase*/
 .placement {
   background-color: blueviolet;
   transition: 0.2s;
@@ -166,4 +166,11 @@ header {
 
 .ship-space-boat {
   background-color: rgb(44, 149, 149);
+}
+/*Placing ships phase classes end*/
+
+/*Classes for attack phase*/
+
+.selected {
+  background-color: rgb(233, 245, 9);
 }

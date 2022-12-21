@@ -258,7 +258,7 @@ function placeBoat(e) {
     space.removeEventListener("click", placeBoat);
   });
   //Prep infotext for actual game
-  infoText.textContent = "Attack";
+  infoText.textContent = "ATTACK";
   currentShip = "attack";
   rotateBtn.style.display = "none";
   fireBtn.style.display = "flex";
@@ -540,10 +540,52 @@ function addShipClass() {
 //Attack Start----------------------------------------------------
 
 function attackStart() {
-  playerAttack();
+  selectCompBoardForAttack();
+}
+//Globally declare enemyBoardSpaces so that I can tamper with the spaces easily
+let enemyBoardSpaces = "";
+function selectCompBoardForAttack() {
+  enemyBoardSpaces = document.querySelectorAll(
+    ".computer-board .row .board-space:not(.board-space-label)"
+  );
+
+  enemyBoardSpaces.forEach((space) => {
+    space.removeEventListener("click", selectComputerCoordinates);
+  });
+
+  enemyBoardSpaces.forEach((space) => {
+    space.addEventListener("click", selectComputerCoordinates);
+  });
 }
 
-function playerAttack() {}
+let enemyCoordinates = [];
+//Select the coordinates for the fireBtn event listener
+function selectComputerCoordinates(e) {
+  //Remove the selected class from the space, so that only one space can
+  //turn yellow at a time.
+  enemyBoardSpaces.forEach((space) => {
+    space.classList.remove("selected");
+  });
+  const space = e.target;
+  let row = space.attributes["data-r"].value;
+  let column = space.attributes["data-c"].value;
+  //Convert the data attributes to numbers so placeShips() works
+  row = Number(row);
+  column = Number(column);
+  enemyCoordinates[0] = row;
+  enemyCoordinates[1] = column;
+  //Give a class to visually represent selection
+  space.classList.add("selected");
+}
+//Launches the attack on the selected computer board space
+fireBtn.addEventListener("click", () => {
+  //Remove the selected class from the space after fireing, so it doesn't
+  //conflict with the other color classes
+  enemyBoardSpaces.forEach((space) => {
+    space.classList.remove("selected");
+  });
+  console.log(enemyCoordinates);
+});
 
 //Attack End------------------------------------------------------
 
