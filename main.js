@@ -44,6 +44,7 @@ function gameStart() {
   //Populating the dom/objects that I'll be using to play the game
   playerBoardName.textContent = playerName + "'s" + " Fleet";
   infoText.textContent = "Place Your Carrier";
+  infoText.classList.add("carrier-text");
   //Player objects
   player.name = playerName;
   player.myboard = playerBoard;
@@ -92,6 +93,14 @@ function checkInvalidSpace(board, row, column, length, ship, func) {
   ) {
     selectPlayerBoardForShip(func);
     infoText.textContent = "Invalid Space";
+    infoText.classList.remove(
+      "carrier-text",
+      "battleship-text",
+      "destroyer-text",
+      "submarine-text",
+      "boat-text"
+    );
+    infoText.classList.add("invalid-text");
     return false;
   } else {
     return true;
@@ -127,6 +136,7 @@ function placeCarrier(e) {
   });
 
   infoText.textContent = "Place Your Battleship";
+  infoText.classList.add("battleship-text");
   currentShip = "battleship";
   selectPlayerBoardForShip(placeBattleship);
 }
@@ -160,6 +170,7 @@ function placeBattleship(e) {
   });
 
   infoText.textContent = "Place Your Destroyer";
+  infoText.classList.add("destroyer-text");
   currentShip = "destroyer";
   selectPlayerBoardForShip(placeDestroyer);
 }
@@ -193,6 +204,7 @@ function placeDestroyer(e) {
   });
 
   infoText.textContent = "Place Your Submarine";
+  infoText.classList.add("submarine-text");
   currentShip = "submarine";
   selectPlayerBoardForShip(placeSubmarine);
 }
@@ -226,6 +238,7 @@ function placeSubmarine(e) {
   });
 
   infoText.textContent = "Place Your Patrol Boat";
+  infoText.classList.add("boat-text");
   currentShip = "patrol boat";
   selectPlayerBoardForShip(placeBoat);
 }
@@ -259,6 +272,15 @@ function placeBoat(e) {
   });
   //Prep infotext for actual game
   infoText.textContent = "ATTACK";
+  infoText.classList.remove(
+    "invalid-text",
+    "carrier-text",
+    "battleship-text",
+    "destroyer-text",
+    "submarine-text",
+    "boat-text"
+  );
+  infoText.classList.add("attack-text");
   currentShip = "attack";
   rotateBtn.style.display = "none";
   fireBtn.style.display = "flex";

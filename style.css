@@ -147,25 +147,46 @@ header {
   background-color: blueviolet;
   transition: 0.2s;
 }
-
+.invalid-text {
+  color: rgb(91, 11, 91);
+}
+.carrier-text {
+  color: rgb(57, 124, 57);
+}
 .ship-space-carrier {
   background-color: rgb(57, 124, 57);
 }
 
+.battleship-text {
+  color: rgb(19, 19, 144);
+}
 .ship-space-battleship {
   background-color: rgb(19, 19, 144);
 }
 
+.destroyer-text {
+  color: rgb(189, 126, 24);
+}
 .ship-space-destroyer {
   background-color: rgb(189, 126, 24);
 }
 
+.submarine-text {
+  color: rgb(182, 39, 120);
+}
 .ship-space-submarine {
   background-color: rgb(182, 39, 120);
 }
 
+.boat-text {
+  color: rgb(44, 149, 149);
+}
 .ship-space-boat {
   background-color: rgb(44, 149, 149);
+}
+
+.attack-text {
+  color: red;
 }
 /*Placing ships phase classes end*/
 
