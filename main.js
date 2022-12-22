@@ -92,7 +92,7 @@ function checkInvalidSpace(board, row, column, length, ship, func) {
     board.placeShips(row, column, length, ship) === "Invalid board position"
   ) {
     selectPlayerBoardForShip(func);
-    infoText.textContent = "Invalid Space";
+    infoText.textContent = "You cannot station your ship there " + playerName;
     infoText.classList.remove(
       "carrier-text",
       "battleship-text",
@@ -609,19 +609,36 @@ fireBtn.addEventListener("click", playerAttack);
 //conflict with the other color classes
 
 function playerAttack() {
+  //Get rid of potential old classes as to not disrupt new ones
+  infoText.classList.remove("invalid-text");
+
   enemyBoardSpaces.forEach((space) => {
     space.classList.remove("selected");
   });
 
   const row = enemyCoordinates[0];
   const column = enemyCoordinates[1];
-  console.log(player.attack(row, column));
-  console.log(player.enemyBoard);
-  // if (player.attack(row, column) === "INVALID SPACE") {
-  //   return;
-  // } else {
-  //   console.log("FUCK");
-  // }
+
+  if (player.attack(row, column) === "INVALID SPACE") {
+    infoText.textContent =
+      "WE HAVE ALREADY ATTACKED THERE " + playerName.toUpperCase();
+    infoText.classList.remove("attack-text", "brace-text");
+    infoText.classList.add("invalid-text");
+    return;
+  } else {
+    const currentSpace = document.querySelector(
+      ".computer-board .right-container [data-c=" +
+        CSS.escape(column) +
+        "]" +
+        "[data-r=" +
+        CSS.escape(row) +
+        "]"
+    );
+
+    console.log(currentSpace);
+    infoText.textContent = "BRACE";
+    infoText.classList.add("brace-text");
+  }
 }
 //Attack End------------------------------------------------------
 

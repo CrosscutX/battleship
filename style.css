@@ -188,6 +188,10 @@ header {
 .attack-text {
   color: red;
 }
+
+.brace-text {
+  color: blue;
+}
 /*Placing ships phase classes end*/
 
 /*Classes for attack phase*/
