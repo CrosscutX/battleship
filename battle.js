@@ -153,8 +153,8 @@ export function Gameboard() {
       //check the grid to see what the space holds, then update board
       //based on that space, also update hits
       if (this.board[row][column] === "M" || this.board[row][column] === "H") {
-        console.log("INVALID SPACE");
-        return;
+        // console.log("INVALID SPACE");
+        return "INVALID SPACE";
       }
       if (this.board[row][column] === "O") {
         this.board[row][column] = "M";
@@ -217,7 +217,11 @@ export function Player() {
       //Find out if the player is a bot, then write a function to calculate
       //How the player launches an attack
       if (this.bot === false) {
-        this.enemyBoard.receiveAttack(row, column);
+        if (this.enemyBoard.receiveAttack(row, column) === "INVALID SPACE") {
+          return "INVALID SPACE";
+        } else {
+          return "VALID SPACE";
+        }
       } else if (this.bot === true) {
         this.enemyBoard.receiveAttack(
           Math.floor(Math.random() * 10),

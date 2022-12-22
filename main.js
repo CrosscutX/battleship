@@ -284,7 +284,11 @@ function placeBoat(e) {
   currentShip = "attack";
   rotateBtn.style.display = "none";
   fireBtn.style.display = "flex";
-
+  //Add placeholder text to first space to help inform player of the game state
+  const firstSpace = document.querySelector(
+    ".computer-board .right-container [data-c='0'][data-r='0']"
+  );
+  firstSpace.classList.add("selected");
   //Get rid of hover event listener for player board
   playerBoardSpaces.forEach((space) => {
     space.removeEventListener("mouseover", addHoverClass);
@@ -580,7 +584,7 @@ function selectCompBoardForAttack() {
   });
 }
 
-let enemyCoordinates = [];
+let enemyCoordinates = [0, 0];
 //Select the coordinates for the fireBtn event listener
 function selectComputerCoordinates(e) {
   //Remove the selected class from the space, so that only one space can
@@ -600,15 +604,25 @@ function selectComputerCoordinates(e) {
   space.classList.add("selected");
 }
 //Launches the attack on the selected computer board space
-fireBtn.addEventListener("click", () => {
-  //Remove the selected class from the space after fireing, so it doesn't
-  //conflict with the other color classes
+fireBtn.addEventListener("click", playerAttack);
+//Remove the selected class from the space after fireing, so it doesn't
+//conflict with the other color classes
+
+function playerAttack() {
   enemyBoardSpaces.forEach((space) => {
     space.classList.remove("selected");
   });
-  console.log(enemyCoordinates);
-});
 
+  const row = enemyCoordinates[0];
+  const column = enemyCoordinates[1];
+  console.log(player.attack(row, column));
+  console.log(player.enemyBoard);
+  // if (player.attack(row, column) === "INVALID SPACE") {
+  //   return;
+  // } else {
+  //   console.log("FUCK");
+  // }
+}
 //Attack End------------------------------------------------------
 
 function gameEnd(player) {
