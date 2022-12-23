@@ -623,10 +623,6 @@ function playerAttack() {
   const spaceBeforeAttack = player.enemyBoard.board[row][column];
 
   if (player.attack(row, column) === "INVALID SPACE") {
-    infoText.textContent =
-      "WE HAVE ALREADY ATTACKED THERE " + playerName.toUpperCase();
-    infoText.classList.remove("attack-text", "brace-text");
-    infoText.classList.add("invalid-text");
     return;
   } else {
     //Select the current space from the row and column
@@ -658,13 +654,63 @@ function playerAttack() {
       }
     } else if (player.enemyBoard.board[row][column] === "M") {
       currentSpace.classList.add("miss");
+      infoText.textContent = "BRACE";
+      infoText.classList.add("brace-text");
     }
   }
+  //Deselect the board while the timeout occurs so the player
+  //has to wait for the computer
+  enemyBoardSpaces.forEach((space) => {
+    space.removeEventListener("click", selectComputerCoordinates);
+  });
   setTimeout(computerAttack, 2000);
 }
 
 function computerAttack() {
-  console.log("delayed attack");
+  const row = randomNum();
+  const column = randomNum();
+  const spaceBeforeAttack = computer.enemyBoard.board[row][column];
+  if (computer.attack(row, column) === "INVALID SPACE") {
+    computerAttack(row, column);
+  } else {
+    //Select the current space from the row and column
+    const currentSpace = document.querySelector(
+      ".left-container .player-board  [data-c=" +
+        CSS.escape(column) +
+        "]" +
+        "[data-r=" +
+        CSS.escape(row) +
+        "]"
+    );
+
+    //Check whether the ship is hit or not
+    if (computer.enemyBoard.board[row][column] === "H") {
+      currentSpace.classList.add("hit");
+      const sunkResult = checkSunk(
+        computer,
+        spaceBeforeAttack,
+        computer.enemyBoard.ships
+      );
+      //If the sunk result returns text, display it in infotext
+      //else add the brace text for computer turn
+      if (sunkResult) {
+        infoText.textContent = sunkResult;
+        infoText.classList.remove("brace-text", "attack-text");
+        infoText.classList.add("sunk-text");
+      } else {
+        infoText.textContent = "ATTACK";
+        infoText.classList.remove("brace-text", "sunk-text");
+        infoText.classList.add("attack-text");
+      }
+    } else if (computer.enemyBoard.board[row][column] === "M") {
+      currentSpace.classList.add("miss");
+      infoText.classList.remove("brace-text", "sunk-text");
+      infoText.classList.add("attack-text");
+      infoText.textContent = "ATTACK";
+    }
+
+    selectCompBoardForAttack();
+  }
 }
 //Checks if the previous space had a ship on it, and then references that tile
 //with enemy's ship array to see if a ship was sunk during that turn
@@ -711,7 +757,6 @@ function checkSunk(player, ship, shipArray) {
 //GAME END-------------------------------------------------
 function gameEnd(player) {
   gamePage.style.display = "none";
-  console.log(player);
   const winScreen = document.querySelector(".finish-screen-win");
   const winText = document.querySelector(".win-text");
   const loseScreen = document.querySelector(".finish-screen-lose");

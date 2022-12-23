@@ -223,12 +223,7 @@ export function Player() {
           return "VALID SPACE";
         }
       } else if (this.bot === true) {
-        if (
-          this.enemyBoard.receiveAttack(
-            Math.floor(Math.random() * 10),
-            Math.floor(Math.random() * 10)
-          ) === "INVLAID SPACE"
-        ) {
+        if (this.enemyBoard.receiveAttack(row, column) === "INVLAID SPACE") {
           return "INVALID SPACE";
         } else {
           return "VALID SPACE";
