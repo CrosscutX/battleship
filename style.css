@@ -85,7 +85,8 @@ header {
 /*Name Page end*/
 
 .game-screen {
-  display: none;
+  opacity: 0;
+  display: flex;
   flex-direction: column;
   margin-top: 3rem;
 }
@@ -192,6 +193,10 @@ header {
 .brace-text {
   color: blue;
 }
+
+.sunk-text {
+  color: orange;
+}
 /*Placing ships phase classes end*/
 
 /*Classes for attack phase*/
@@ -214,6 +219,7 @@ header {
 
 .finish-screen-win {
   display: flex;
+  opacity: 0;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -221,9 +227,6 @@ header {
 }
 
 .finish-screen-win h2 {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 2s linear 2s, opacity 2s;
   font-size: 5vw;
 }
 
@@ -235,7 +238,8 @@ header {
 }
 
 .finish-screen-lose {
-  display: none;
+  opacity: 0;
+  display: flex;
   transition: 2s;
   justify-content: center;
   align-items: center;
@@ -244,4 +248,14 @@ header {
 
 .finish-screen-lose h2 {
   font-size: 6vw;
+}
+
+.show {
+  transition: opacity 2s linear;
+  opacity: 1;
+}
+
+.hide {
+  transition: opacity 2s linear;
+  opacity: 0;
 }

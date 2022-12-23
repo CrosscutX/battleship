@@ -36,7 +36,8 @@ function gameStart() {
   //Reveal the game page, get the value on the textbox and display it above
   //the player's ship. Info text is applied.
   namePage.style.display = "none";
-  gamePage.style.display = "flex";
+  gamePage.classList.add("show");
+
   playerName = document.querySelector(".name").value;
   if (!playerName) {
     playerName = "Commander";
@@ -645,17 +646,26 @@ function playerAttack() {
         spaceBeforeAttack,
         player.enemyBoard.ships
       );
+      //If the sunk result returns text, display it in infotext
+      //else add the brace text for computer turn
       if (sunkResult) {
+        infoText.textContent = sunkResult;
+        infoText.classList.remove("brace-text", "attack-text");
+        infoText.classList.add("sunk-text");
+      } else {
+        infoText.textContent = "BRACE";
+        infoText.classList.add("brace-text");
       }
     } else if (player.enemyBoard.board[row][column] === "M") {
       currentSpace.classList.add("miss");
     }
-    infoText.textContent = "BRACE";
-    infoText.classList.add("brace-text");
   }
+  setTimeout(computerAttack, 2000);
 }
 
-function computerAttack() {}
+function computerAttack() {
+  console.log("delayed attack");
+}
 //Checks if the previous space had a ship on it, and then references that tile
 //with enemy's ship array to see if a ship was sunk during that turn
 function checkSunk(player, ship, shipArray) {
@@ -698,6 +708,7 @@ function checkSunk(player, ship, shipArray) {
 }
 //Attack End------------------------------------------------------
 
+//GAME END-------------------------------------------------
 function gameEnd(player) {
   gamePage.style.display = "none";
   console.log(player);
@@ -707,11 +718,10 @@ function gameEnd(player) {
   //Code to display a winner
   if (player.name === "Computer") {
     loseScreen.style.display = "flex";
-    loseScreen.style.transition = "2s";
+    loseScreen.classList.add("show");
   } else {
     winScreen.style.display = "flex";
-    winScreen.style.transition = "2s";
     winText.textContent = "Well Done " + player.name;
+    winScreen.classList.add("show");
   }
 }
-//GAME END-------------------------------------------------
