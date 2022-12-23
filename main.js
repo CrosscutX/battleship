@@ -634,8 +634,12 @@ function playerAttack() {
         CSS.escape(row) +
         "]"
     );
-
-    console.log(currentSpace);
+    //Check whether the ship is hit or not
+    if (player.enemyBoard.board[row][column] === "H") {
+      console.log("hit space");
+    } else if (player.enemyBoard.board[row][column] === "M") {
+      console.log("missed space");
+    }
     infoText.textContent = "BRACE";
     infoText.classList.add("brace-text");
   }
