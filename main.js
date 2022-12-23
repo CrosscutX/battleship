@@ -342,8 +342,7 @@ function placeBotShips() {
 
   computerBoard.direction = computerDirection[Math.floor(Math.random() * 2)];
   checkBotShips(randomNum(), randomNum(), computerBoat.length, computerBoat);
-  console.log(computer);
-  console.log(computerBoard);
+  console.log(computerBoard.board);
 }
 //random number 0-9 for ship placement
 function randomNum() {
@@ -661,7 +660,6 @@ function computerAttack() {}
 //with enemy's ship array to see if a ship was sunk during that turn
 function checkSunk(player, ship, shipArray) {
   //Create varibles for each ship
-  console.log(player);
   let carrier = "";
   let battleship = "";
   let destroyer = "";
@@ -702,14 +700,17 @@ function checkSunk(player, ship, shipArray) {
 
 function gameEnd(player) {
   gamePage.style.display = "none";
+  console.log(player);
   const winScreen = document.querySelector(".finish-screen-win");
   const winText = document.querySelector(".win-text");
   const loseScreen = document.querySelector(".finish-screen-lose");
   //Code to display a winner
   if (player.name === "Computer") {
     loseScreen.style.display = "flex";
+    loseScreen.style.transition = "2s";
   } else {
     winScreen.style.display = "flex";
+    winScreen.style.transition = "2s";
     winText.textContent = "Well Done " + player.name;
   }
 }

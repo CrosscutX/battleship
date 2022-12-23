@@ -213,8 +213,7 @@ header {
 /*End phase*/
 
 .finish-screen-win {
-  transition-duration: 2s;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -222,6 +221,9 @@ header {
 }
 
 .finish-screen-win h2 {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 2s linear 2s, opacity 2s;
   font-size: 5vw;
 }
 
@@ -233,8 +235,8 @@ header {
 }
 
 .finish-screen-lose {
+  display: none;
   transition: 2s;
-  display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
