@@ -201,7 +201,9 @@ header {
 }
 
 .hit {
+  background-color: red;
 }
 
 .miss {
+  background-color: cyan;
 }

@@ -615,9 +615,12 @@ function playerAttack() {
   enemyBoardSpaces.forEach((space) => {
     space.classList.remove("selected");
   });
-
+  //Grab the current selected row and column
   const row = enemyCoordinates[0];
   const column = enemyCoordinates[1];
+  //Grab the space before we launch an attack so that we can display sunk
+  //ships properly later
+  const spaceBeforeAttack = player.enemyBoard.board[row][column];
 
   if (player.attack(row, column) === "INVALID SPACE") {
     infoText.textContent =
@@ -626,6 +629,7 @@ function playerAttack() {
     infoText.classList.add("invalid-text");
     return;
   } else {
+    //Select the current space from the row and column
     const currentSpace = document.querySelector(
       ".computer-board .right-container [data-c=" +
         CSS.escape(column) +
@@ -636,20 +640,69 @@ function playerAttack() {
     );
     //Check whether the ship is hit or not
     if (player.enemyBoard.board[row][column] === "H") {
-      console.log("hit space");
+      currentSpace.classList.add("hit");
+      const sunkResult = checkSunk(
+        player,
+        spaceBeforeAttack,
+        player.enemyBoard.ships
+      );
+      if (sunkResult) {
+      }
     } else if (player.enemyBoard.board[row][column] === "M") {
-      console.log("missed space");
+      currentSpace.classList.add("miss");
     }
     infoText.textContent = "BRACE";
     infoText.classList.add("brace-text");
   }
 }
+
+function computerAttack() {}
+//Checks if the previous space had a ship on it, and then references that tile
+//with enemy's ship array to see if a ship was sunk during that turn
+function checkSunk(player, ship, shipArray) {
+  //Create varibles for each ship
+  console.log(player);
+  let carrier = "";
+  let battleship = "";
+  let destroyer = "";
+  let submarine = "";
+  let boat = "";
+  //assign said ships based on name of object
+  shipArray.forEach((element) => {
+    if (element.name === "Carrier") {
+      carrier = element;
+    } else if (element.name === "Battleship") {
+      battleship = element;
+    } else if (element.name === "Destroyer") {
+      destroyer = element;
+    } else if (element.name === "Submarine") {
+      submarine = element;
+    } else if (element.name === "Patrol Boat") {
+      boat = element;
+    }
+  });
+
+  if (player.enemyBoard.checkGameEnd() === true) {
+    gameEnd(player);
+  } else if (ship === "C" && carrier.sunk === true) {
+    return "CARRIER SUNK";
+  } else if (ship === "B" && battleship.sunk === true) {
+    return "BATTLESHIP SUNK";
+  } else if (ship === "D" && destroyer.sunk === true) {
+    return "DESTROYER SUNK";
+  } else if (ship === "S" && submarine.sunk === true) {
+    return "SUBMARINE SUNK";
+  } else if (ship === "P" && boat.sunk === true) {
+    return "PATROL BOAT SUNK";
+  } else {
+    return null;
+  }
+}
 //Attack End------------------------------------------------------
 
 function gameEnd(player) {
-  if (player.enemyBoard.checkGameEnd() === true) {
-    //Code to display a winner
-    console.log(player.name + " is the winner!");
-  }
+  //Code to display a winner
+  console.log(player);
+  console.log(player.name + " is the winner!");
 }
 //GAME END-------------------------------------------------
