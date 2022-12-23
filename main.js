@@ -701,8 +701,16 @@ function checkSunk(player, ship, shipArray) {
 //Attack End------------------------------------------------------
 
 function gameEnd(player) {
+  gamePage.style.display = "none";
+  const winScreen = document.querySelector(".finish-screen-win");
+  const winText = document.querySelector(".win-text");
+  const loseScreen = document.querySelector(".finish-screen-lose");
   //Code to display a winner
-  console.log(player);
-  console.log(player.name + " is the winner!");
+  if (player.name === "Computer") {
+    loseScreen.style.display = "flex";
+  } else {
+    winScreen.style.display = "flex";
+    winText.textContent = "Well Done " + player.name;
+  }
 }
 //GAME END-------------------------------------------------

@@ -207,3 +207,39 @@ header {
 .miss {
   background-color: cyan;
 }
+
+/*End of attack classes */
+
+/*End phase*/
+
+.finish-screen-win {
+  transition-duration: 2s;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.finish-screen-win h2 {
+  font-size: 5vw;
+}
+
+.win-text {
+  color: red;
+  font-size: 10vw;
+  transition-delay: 2s;
+  transition-duration: 2s;
+}
+
+.finish-screen-lose {
+  transition: 2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.finish-screen-lose h2 {
+  font-size: 6vw;
+}
