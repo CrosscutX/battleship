@@ -663,7 +663,7 @@ function playerAttack() {
   enemyBoardSpaces.forEach((space) => {
     space.removeEventListener("click", selectComputerCoordinates);
   });
-  setTimeout(computerAttack, 2000);
+  setTimeout(computerAttack, 1200);
 }
 
 function computerAttack() {

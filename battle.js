@@ -146,9 +146,6 @@ export function Gameboard() {
         }
       }
     },
-    //Need to figure out implementation for hitting the right ship,
-    //probably need to pass the entire ship objects as arguments
-    //for the place ships, and add them to an array.
     receiveAttack(row, column) {
       //check the grid to see what the space holds, then update board
       //based on that space, also update hits
