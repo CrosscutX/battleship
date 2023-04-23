@@ -11,6 +11,7 @@ const startBtn = document.querySelector(".start-button");
 const rotateBtn = document.querySelector(".rotate-button");
 const fireBtn = document.querySelector(".fire-button");
 const playerBoardName = document.querySelector(".left-container h2");
+const boards = document.querySelector(".boards");
 //Define the players that we'll be using for the game
 const player = Player();
 const computer = Player();
@@ -36,6 +37,8 @@ function gameStart() {
   //Reveal the game page, get the value on the textbox and display it above
   //the player's ship. Info text is applied.
   namePage.style.display = "none";
+  //Displaying the boards as none to start helps out mobile design
+  boards.style.display = "flex";
   gamePage.classList.add("show");
 
   playerName = document.querySelector(".name").value;

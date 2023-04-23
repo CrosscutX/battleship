@@ -7,6 +7,10 @@ body {
   background-color: black;
   color: white;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  width: 100%;
+}
+html {
+  width: 100%;
 }
 
 h1 {
@@ -15,6 +19,7 @@ h1 {
 }
 
 h2 {
+  text-align: center;
   font-weight: 100;
 }
 
@@ -33,6 +38,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .header-content {
@@ -60,6 +66,8 @@ header {
   border: 4px solid white;
   font-size: 2rem;
   padding: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .name-box input {
@@ -115,7 +123,7 @@ header {
 }
 
 .boards {
-  display: flex;
+  display: none;
   justify-content: space-around;
   font-size: 2rem;
   padding: 1rem;
@@ -258,4 +266,18 @@ header {
 .hide {
   transition: opacity 2s linear;
   opacity: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .boards {
+    flex-direction: column;
+  }
+
+  .game-screen {
+    justify-content: center;
+  }
+  /*Info text starts to act wonky because of how big it is on smaller screens*/
+  .info-text {
+    font-size: 2.2rem;
+  }
 }
